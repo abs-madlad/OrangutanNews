@@ -1,0 +1,290 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,700&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --background: #FAF8F3;
+  --foreground: #1A0A00;
+  --primary: #E85D04;
+  --primary-dark: #C44D00;
+  --primary-light: #FF7A2F;
+  --accent: #F48C06;
+  --dark-bg: #111008;
+  --dark-surface: #1C1A12;
+  --border: #E8E2D6;
+  --muted: #8A7E6E;
+  --card-bg: #FFFDF9;
+  --radius: 0.75rem;
+  --war-red: #DC2626;
+  --credit-green: #16A34A;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── TYPOGRAPHY ── */
+.font-display {
+  font-family: 'Fraunces', serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ── SCROLL EXPANSION HERO ── */
+#expansion-hero-container {
+  height: 280vh;
+  position: relative;
+}
+
+#expansion-hero-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(26, 10, 0, 0.5);
+  transition: border-radius 0.3s ease;
+}
+
+/* ── GLASSMORPHISM ── */
+.glass-card {
+  background: rgba(250, 248, 243, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-dark {
+  background: rgba(17, 16, 8, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ── NEWS CARDS ── */
+.news-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.news-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(26, 10, 0, 0.1);
+  border-color: var(--primary);
+}
+
+/* ── WAR CARDS ── */
+.war-card {
+  background: var(--dark-surface);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: var(--radius);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.war-card:hover {
+  border-color: rgba(232, 93, 4, 0.4);
+  transform: translateY(-3px);
+}
+
+/* ── TRUMP CREDIT BADGE ── */
+.badge-claimed {
+  background: rgba(22, 163, 74, 0.15);
+  color: #16A34A;
+  border: 1px solid rgba(22, 163, 74, 0.3);
+}
+
+.badge-ongoing {
+  background: rgba(220, 38, 38, 0.15);
+  color: #DC2626;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.badge-trump-started {
+  background: rgba(232, 93, 4, 0.15);
+  color: var(--primary);
+  border: 1px solid rgba(232, 93, 4, 0.35);
+}
+
+/* ── MISHAP COUNTER ── */
+.counter-digit {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 500;
+  line-height: 1;
+  color: var(--primary);
+  text-shadow: 0 0 60px rgba(232, 93, 4, 0.3);
+}
+
+.counter-pulse {
+  animation: counterPulse 2s ease-in-out infinite;
+}
+
+@keyframes counterPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ── SPARKLE ── */
+@keyframes sparkle-fade {
+  0%, 100% { opacity: 0; transform: scale(0) rotate(75deg); }
+  50% { opacity: 1; transform: scale(1) rotate(120deg); }
+}
+
+/* ── TICKER ── */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  animation: ticker-scroll 40s linear infinite;
+  width: max-content;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* ── MARQUEE FOOTER ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee 25s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+/* ── SECTION DIVIDER ── */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ── LOADING SKELETON ── */
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #f0ece3 25%, #e8e2d6 50%, #f0ece3 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+/* ── ORANGE GLOW ── */
+.orange-glow {
+  box-shadow: 0 0 40px rgba(232, 93, 4, 0.25), 0 0 80px rgba(232, 93, 4, 0.1);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+/* ── NOISE TEXTURE ── */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── HERO BLEND ── */
+.mix-blend-diff {
+  mix-blend-mode: difference;
+}
+
+/* ── ARTICLE LINK ── */
+.article-link {
+  color: var(--primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(232, 93, 4, 0.3);
+  transition: border-color 0.2s;
+}
+.article-link:hover {
+  border-color: var(--primary);
+}
+
+/* ── SECTION TABS ── */
+.tab-active {
+  background: var(--primary);
+  color: white;
+}
+
+/* ── CONFLICT STATUS PULSE ── */
+@keyframes statusPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.status-pulse {
+  animation: statusPulse 1.5s ease-in-out infinite;
+}
+
+/* ── HERO TEXT ── */
+.hero-text-shadow {
+  text-shadow: 0 2px 40px rgba(26, 10, 0, 0.6);
+}
