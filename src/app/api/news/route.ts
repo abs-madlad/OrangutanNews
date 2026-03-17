@@ -9,39 +9,31 @@ export interface NewsItem {
   link: string;
   pubDate: string;
   source: string;
+  // TODO: 'cover' category is defined but no feed populates it. Implement feed config or remove if unused.
   category: 'trump-daily' | 'mess' | 'wars' | 'cover';
   imageUrl?: string;
 }
 
 function parseRSSDate(dateStr: string): string {
-  try {
-    return new Date(dateStr).toISOString();
-  } catch {
-    return new Date().toISOString();
-  }
-}
-
-function extractImage(item: Element): string | undefined {
-  const mediaContent = item.querySelector('content');
-  const enclosure = item.querySelector('enclosure');
-  const mediaThumb = item.querySelector('thumbnail');
-  
-  if (mediaThumb?.getAttribute('url')) return mediaThumb.getAttribute('url') || undefined;
-  if (mediaContent?.getAttribute('url')) return mediaContent.getAttribute('url') || undefined;
-  if (enclosure?.getAttribute('url')) return enclosure.getAttribute('url') || undefined;
-  
-  const desc = item.querySelector('description')?.textContent || '';
-  const imgMatch = desc.match(/src="([^"]+\.(jpg|jpeg|png|webp))"/i);
-  if (imgMatch) return imgMatch[1];
-  
-  return undefined;
+  const d = new Date(dateStr);
+  return isNaN(d.getTime()) ? new Date().toISOString() : d.toISOString();
 }
 
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]*>/g, '').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+  return html
+    .replace(/<[^>]*>/g, '')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+    .trim();
 }
 
-async function fetchRSS(url: string, timeout = 8000): Promise<string> {
+// TODO: allorigins.win is a single point of failure. Consider a fallback proxy or server-side fetch if this becomes unreliable.
+async function fetchRSS(url: string, timeout = 10000): Promise<string> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeout);
   try {
@@ -51,8 +43,9 @@ async function fetchRSS(url: string, timeout = 8000): Promise<string> {
     });
     clearTimeout(timer);
     return await res.text();
-  } catch {
+  } catch (err) {
     clearTimeout(timer);
+    console.error(`[fetchRSS] Failed: ${url}`, err instanceof Error ? err.message : err);
     return '';
   }
 }
@@ -61,6 +54,7 @@ function parseItems(xml: string, source: string, category: NewsItem['category'],
   if (!xml) return [];
   const items: NewsItem[] = [];
   
+  // TODO: Consider replacing regex XML parsing with fast-xml-parser for correctness on malformed or deeply nested RSS feeds.
   // Simple regex-based XML parsing for edge runtime
   const itemMatches = xml.match(/<item>([\s\S]*?)<\/item>/g) || [];
   
@@ -82,7 +76,7 @@ function parseItems(xml: string, source: string, category: NewsItem['category'],
     
     if (title && link) {
       items.push({
-        id: `${source}-${Buffer.from(link).toString('base64').slice(0, 12)}`,
+        id: `${source}-${btoa(encodeURIComponent(link)).slice(0, 12)}`,
         title,
         description,
         link,
@@ -126,18 +120,9 @@ export async function GET(request: NextRequest) {
     
     const results = await Promise.allSettled(
       targetFeeds.map(async (feed) => {
-        const xml = await fetchRSS(
-          `https://api.allorigins.win/get?url=${encodeURIComponent(feed.url)}`
-        );
+        const xml = await fetchRSS(feed.url);
         // allorigins wraps in JSON
-        let content = xml;
-        try {
-          const parsed = JSON.parse(xml);
-          content = parsed.contents || xml;
-        } catch {
-          content = xml;
-        }
-        return parseItems(content, feed.source, feed.category, 8);
+        return parseItems(xml, feed.source, feed.category, 8);
       })
     );
     
@@ -166,6 +151,6 @@ export async function GET(request: NextRequest) {
       }
     });
   } catch (error) {
-    return NextResponse.json({ items: [], fetchedAt: new Date().toISOString(), total: 0, error: 'Feed fetch failed' }, { status: 200 });
+    return NextResponse.json({ items: [], fetchedAt: new Date().toISOString(), total: 0, error: 'Feed fetch failed' }, { status: 503 });
   }
 }
