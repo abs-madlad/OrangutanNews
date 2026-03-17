@@ -182,8 +182,27 @@ export default function WarsSection() {
         </div>
 
         {/* Conflict cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {conflictsWithNews.map((conflict, i) => {
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="war-card p-4">
+                <div
+                  className="h-40 w-full mb-4 rounded"
+                  style={{
+                    background: 'linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%)',
+                    backgroundSize: '800px 100%',
+                    animation: 'shimmer 1.5s infinite linear'
+                  }}
+                />
+                <div className="h-4 w-2/3 mb-2 rounded" style={{ background: 'rgba(255,255,255,0.08)' }} />
+                <div className="h-3 w-full mb-1 rounded" style={{ background: 'rgba(255,255,255,0.05)' }} />
+                <div className="h-3 w-3/4 rounded" style={{ background: 'rgba(255,255,255,0.05)' }} />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {conflictsWithNews.map((conflict, i) => {
             const statusCfg = STATUS_CONFIG[conflict.status];
             const isSelected = selectedConflict === conflict.id;
             return (
@@ -276,8 +295,9 @@ export default function WarsSection() {
                 </div>
               </div>);
 
-          })}
-        </div>
+            })}
+          </div>
+        )}
 
         {/* Live news from wars feed */}
         {!loading && liveNews.length > 0 &&
@@ -286,7 +306,7 @@ export default function WarsSection() {
             <div className="space-y-2">
               {liveNews.slice(0, 8).map((item, i) =>
             <a
-              key={i}
+              key={item.link || item.title}
               href={item.link}
               target="_blank"
               rel="noopener noreferrer"
