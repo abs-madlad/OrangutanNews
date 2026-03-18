@@ -75,7 +75,7 @@ export default function WarsSection() {
     trumpClaimedCredit: false,
     description: 'The RSF vs SAF conflict since April 2023 has created the world\'s largest displacement crisis. US aid programs gutted by DOGE cuts.',
     casualties: '150,000+',
-    imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_1f0cc7a01-1765011326410.png"
+    imageUrl: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&auto=format&fit=crop"
   },
   {
     id: 'trade-war-china',
@@ -97,7 +97,7 @@ export default function WarsSection() {
     trumpClaimedCredit: false,
     description: 'Gang control of over 85% of Port-au-Prince has created a humanitarian catastrophe. US aid suspension worsened the crisis.',
     casualties: '8,000+ in 2024',
-    imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_2e9eb8ad5-1773429126351.png"
+    imageUrl: "https://images.unsplash.com/photo-1559329255-be3a748397f7?w=800&auto=format&fit=crop"
   },
   {
     id: 'myanmar',
@@ -108,7 +108,7 @@ export default function WarsSection() {
     trumpClaimedCredit: false,
     description: 'Military junta vs resistance forces since 2021 coup. Trump administration has shown no engagement.',
     casualties: '50,000+',
-    imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_1ac4f9517-1765672629452.png"
+    imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop"
   }];
 
 
