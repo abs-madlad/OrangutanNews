@@ -32,25 +32,25 @@ const FALLBACK_MESS: NewsItem[] = [
   id: 'm2', title: 'US Allies Scramble After NATO Commitment Wavers',
   description: 'European defense ministers held emergency talks after the US president suggested conditional support for NATO allies, triggering the largest European rearmament push in decades.',
   link: '#', pubDate: new Date(Date.now() - 172800000).toISOString(), source: 'BBC',
-  category: 'mess', imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_1d01ba443-1773429124702.png"
+  category: 'mess', imageUrl: "https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?w=800&auto=format&fit=crop"
 },
 {
   id: 'm3', title: 'Federal Agencies Gutted: USAID Programs Shuttered',
   description: 'Over 80% of USAID contracts cancelled. Aid workers warn of humanitarian crises in Yemen, Sudan, and Gaza as food and medical supply chains collapse.',
   link: '#', pubDate: new Date(Date.now() - 259200000).toISOString(), source: 'AP News',
-  category: 'mess', imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_11262a39c-1773090961538.png"
+  category: 'mess', imageUrl: "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=800&auto=format&fit=crop"
 },
 {
   id: 'm4', title: 'Greenland Annexation Threats Destabilize Arctic Relations',
   description: 'Denmark and Arctic Council members convened after repeated statements about US territorial ambitions over Greenland sparked a diplomatic crisis.',
   link: '#', pubDate: new Date(Date.now() - 345600000).toISOString(), source: 'NY Times',
-  category: 'mess', imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_1a8d9adb3-1768133359762.png"
+  category: 'mess', imageUrl: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&auto=format&fit=crop"
 },
 {
   id: 'm5', title: 'DOJ Independence Under Threat as Prosecutors Fired',
   description: 'The firing of multiple career prosecutors at the Justice Department triggered alarm from legal scholars about the erosion of judicial independence.',
   link: '#', pubDate: new Date(Date.now() - 432000000).toISOString(), source: 'Washington Post',
-  category: 'mess', imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_107cca73f-1765211176918.png"
+  category: 'mess', imageUrl: "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=800&auto=format&fit=crop"
 },
 {
   id: 'm6', title: 'Climate Agreements Abandoned: Paris Accord Exit Confirmed',

@@ -26,7 +26,7 @@ const FALLBACK_NEWS: NewsItem[] = [
   id: 'f2', title: "Trump's Mar-a-Lago Meeting Raises Ethics Questions",
   description: 'Foreign dignitaries and lobbyists gathered at the private club, raising questions about transparency and the emoluments clause.',
   link: '#', pubDate: new Date(Date.now() - 7200000).toISOString(), source: 'Washington Post', category: 'trump-daily',
-  imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_1a6eee664-1773429127918.png"
+  imageUrl: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=800&auto=format&fit=crop"
 },
 {
   id: 'f3', title: 'Trump Attacks Fed Chair Powell on Social Media',
@@ -38,7 +38,7 @@ const FALLBACK_NEWS: NewsItem[] = [
   id: 'f4', title: 'DOGE Team Gains Access to Social Security Data',
   description: 'The Department of Government Efficiency team led by Elon Musk has reportedly gained access to sensitive federal databases.',
   link: '#', pubDate: new Date(Date.now() - 14400000).toISOString(), source: 'AP News', category: 'trump-daily',
-  imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_188fc5fcc-1772736246350.png"
+  imageUrl: "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=800&auto=format&fit=crop"
 },
 {
   id: 'f5', title: 'Trump Threatens NATO Allies Over Defense Spending',
@@ -50,7 +50,7 @@ const FALLBACK_NEWS: NewsItem[] = [
   id: 'f6', title: 'Trump Administration Freezes Foreign Aid Programs',
   description: 'Dozens of USAID programs across Africa and Southeast Asia were abruptly suspended pending review.',
   link: '#', pubDate: new Date(Date.now() - 21600000).toISOString(), source: 'Reuters', category: 'trump-daily',
-  imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_19662db4f-1772186344369.png"
+  imageUrl: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?w=800&auto=format&fit=crop"
 }];
 
 
