@@ -33,13 +33,16 @@ function stripHtml(html: string): string {
 }
 
 // TODO: allorigins.win is a single point of failure. Consider a fallback proxy or server-side fetch if this becomes unreliable.
-async function fetchRSS(url: string, timeout = 10000): Promise<string> {
+async function fetchRSS(url: string, timeout = 6000): Promise<string> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeout);
   try {
     const res = await fetch(url, {
       signal: controller.signal,
-      headers: { 'User-Agent': 'OrangutanNews/1.0 RSS Reader' },
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; RSS Reader/1.0)',
+        'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+      },
     });
     clearTimeout(timer);
     return await res.text();
@@ -76,7 +79,7 @@ function parseItems(xml: string, source: string, category: NewsItem['category'],
     
     if (title && link) {
       items.push({
-        id: `${source}-${btoa(encodeURIComponent(link)).slice(0, 12)}`,
+        id: `${source}-${btoa(encodeURIComponent(link))}`,
         title,
         description,
         link,
@@ -100,17 +103,17 @@ export async function GET(request: NextRequest) {
       'trump-daily': [
         { url: 'https://feeds.feedburner.com/thedailybeast/politics', source: 'Daily Beast', category: 'trump-daily' },
         { url: 'https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml', source: 'NY Times', category: 'trump-daily' },
-        { url: 'https://feeds.washingtonpost.com/rss/politics', source: 'Washington Post', category: 'trump-daily' },
+        { url: 'https://thehill.com/rss/syndicator/19109', source: 'The Hill', category: 'trump-daily' },
       ],
       'mess': [
         { url: 'https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml', source: 'NY Times Economy', category: 'mess' },
-        { url: 'https://feeds.washingtonpost.com/rss/business', source: 'Washington Post Business', category: 'mess' },
-        { url: 'https://feeds.reuters.com/reuters/businessNews', source: 'Reuters Business', category: 'mess' },
+        { url: 'https://thehill.com/rss/syndicator/19110', source: 'The Hill Business', category: 'mess' },
+        { url: 'https://feeds.a.dj.com/rss/RSSWorldNews.xml', source: 'Wall Street Journal', category: 'mess' },
       ],
       'wars': [
         { url: 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml', source: 'NY Times World', category: 'wars' },
-        { url: 'https://feeds.reuters.com/reuters/worldNews', source: 'Reuters World', category: 'wars' },
         { url: 'https://feeds.bbci.co.uk/news/world/rss.xml', source: 'BBC World', category: 'wars' },
+        { url: 'https://feeds.bbci.co.uk/news/world/us-canada/rss.xml', source: 'BBC US & Canada', category: 'wars' },
       ],
     };
     
