@@ -129,7 +129,7 @@ export default function WarsSection() {
     );
     sectionRef.current?.querySelectorAll('.reveal, .reveal-left').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, []);
+  }, [loading]);
 
   const conflictsWithNews = conflicts.map((conflict) => {
     const related = liveNews.find((n) =>
