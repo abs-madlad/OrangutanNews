@@ -137,6 +137,8 @@ export default function MishapCounter() {
   const [lastUpdated, setLastUpdated] = useState('');
 
   useEffect(() => {
+    if (!animate) return;
+    
     // Calculate RSS bonus — count news items per category from live feeds
     Promise.all([
       fetch('/api/news?section=trump-daily').then(r => r.json()).catch(() => ({ items: [] })),
@@ -174,7 +176,7 @@ export default function MishapCounter() {
       setTotalMishaps(base + rssTotal);
       setLastUpdated(new Date().toLocaleTimeString());
     });
-  }, []);
+  }, [animate]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
