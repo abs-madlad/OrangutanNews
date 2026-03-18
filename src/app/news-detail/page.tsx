@@ -30,14 +30,14 @@ const RELATED_FALLBACK: ArticleData[] = [
   description: 'A sweeping set of executive orders reshapes federal workforce protections.',
   link: '#', source: 'Reuters', pubDate: new Date(Date.now() - 3600000).toISOString(),
   category: 'trump-daily',
-  imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_134c3f062-1772618977979.png"
+  imageUrl: "https://images.unsplash.com/photo-1555848962-6e79363ec58f?w=800&auto=format&fit=crop"
 },
 {
   title: 'Global Markets React to US Tariff Announcements',
   description: 'Asian and European markets fell sharply after new tariff announcements.',
   link: '#', source: 'AP News', pubDate: new Date(Date.now() - 7200000).toISOString(),
   category: 'mess',
-  imageUrl: "https://img.rocket.new/generatedImages/rocket_gen_img_1dad0aa0d-1766114485221.png"
+  imageUrl: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&auto=format&fit=crop"
 },
 {
   title: 'Ukraine Ceasefire Negotiations Stall Again',
