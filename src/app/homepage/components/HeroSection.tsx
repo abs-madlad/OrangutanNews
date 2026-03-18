@@ -37,8 +37,8 @@ export default function HeroSection() {
     fetch('/api/news?section=trump-daily').
     then((r) => r.json()).
     then((data) => {
-      if (data.items && data.items.length > 0) {
-        const top = data.items[0];
+      if (data.items && data.items.length >= 2) {
+        const top = data.items.find((item: { imageUrl?: string }) => item.imageUrl) || data.items[0];
         setHero({
           title: top.title,
           description: top.description,
