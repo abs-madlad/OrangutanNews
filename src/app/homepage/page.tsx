@@ -7,6 +7,7 @@ import HeroSection from './components/HeroSection';
 import TrumpDailySection from './components/TrumpDailySection';
 import MessSection from './components/MessSection';
 import WarsSection from './components/WarsSection';
+import EpsteinSection from './components/EpsteinSection';
 import MishapCounter from './components/MishapCounter';
 
 export default function Homepage() {
@@ -44,6 +45,10 @@ export default function Homepage() {
 
         <section id="wars" className="py-16">
           <WarsSection />
+        </section>
+
+        <section id="epstein" className="py-16 bg-card-bg">
+          <EpsteinSection />
         </section>
 
         <section id="counter" className="py-16 bg-card-bg">
