@@ -67,14 +67,15 @@ export default function WarsSection() {
     imageUrl: "https://images.unsplash.com/photo-1720642591649-efd907f0f234"
   },
   {
-    id: 'sudan',
-    name: 'Sudan Civil War',
-    region: 'East Africa',
+    id: 'Iran',
+    name: 'The Middle East Conflict',
+    region: 'Middle East',
     status: 'active',
-    startedUnderTrump: false,
-    trumpClaimedCredit: false,
-    description: 'The RSF vs SAF conflict since April 2023 has created the world\'s largest displacement crisis. US aid programs gutted by DOGE cuts.',
-    casualties: '150,000+',
+    startedUnderTrump: true,
+    trumpClaimedCredit: true,
+    trumpCreditQuote: 'Trump claims the US and Israel are winning decisively and the war is "very complete," "far ahead of schedule," or "nearly won."',
+    description: 'United States and Israel launched Operation Epic Fury — a massive joint campaign of surprise airstrikes targeting Iranian nuclear sites, missile facilities, air defenses, military leadership, and key regime figures, including the assassination of Supreme Leader Ali Khamenei in the opening hours.',
+    casualties:'2200+',
     imageUrl: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&auto=format&fit=crop"
   },
   {
@@ -90,24 +91,26 @@ export default function WarsSection() {
   },
   {
     id: 'haiti',
-    name: 'Haiti Gang Crisis',
-    region: 'Caribbean',
+    name: 'Thailand-Cambodia conflict',
+    region: 'Southeast Asia',
     status: 'active',
-    startedUnderTrump: false,
-    trumpClaimedCredit: false,
-    description: 'Gang control of over 85% of Port-au-Prince has created a humanitarian catastrophe. US aid suspension worsened the crisis.',
+    startedUnderTrump: true,
+    trumpClaimedCredit: true,
+    trumpCreditQuote:`This is a momentous day for all of the people of Southeast Asia, as we signed a historic agreement to end the military conflict between Cambodia and Thailand. And we're so honored to be involved. And that was so important to me. Two great countries, but they were - they were going at it.`,
+    description: 'Thailand launched airstrikes and Operation Yuttha Bodin; Cambodia responded with artillery and rockets. Clashes spread to at least 12 border sites, involving fighter jets, drones, and ground operations.',
     casualties: '8,000+ in 2024',
     imageUrl: "https://images.unsplash.com/photo-1559329255-be3a748397f7?w=800&auto=format&fit=crop"
   },
   {
-    id: 'myanmar',
-    name: 'Myanmar Civil War',
+    id: 'pakistan-afghanistan',
+    name: 'The Pakistan-Afghanistan conflict',
     region: 'Southeast Asia',
     status: 'active',
-    startedUnderTrump: false,
+    startedUnderTrump: true,
     trumpClaimedCredit: false,
-    description: 'Military junta vs resistance forces since 2021 coup. Trump administration has shown no engagement.',
-    casualties: '50,000+',
+    description: 'Major clashes began after Pakistani airstrikes (including one in Kabul targeting a TTP leader). Retaliatory Afghan operations killed Pakistani soldiers. A Qatar-mediated ceasefire was announced on 19 October 2025 but proved fragile; follow-up talks failed.',
+    casualties: '500+',
+    trumpCreditQuote:`I heard that Pakistan and Afghanistan have started up. But I’ll get that solved very quickly.`,
     imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&auto=format&fit=crop"
   }];
 
@@ -129,7 +132,7 @@ export default function WarsSection() {
     );
     sectionRef.current?.querySelectorAll('.reveal, .reveal-left').forEach((el) => observer.observe(el));
     return () => observer.disconnect();
-  }, [loading]);
+  }, [loading, selectedConflict]);
 
   const conflictsWithNews = conflicts.map((conflict) => {
     const related = liveNews.find((n) =>
