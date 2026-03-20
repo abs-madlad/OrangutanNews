@@ -133,7 +133,17 @@ function parseItems(xml: string, source: string, category: NewsItem['category'],
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  const section = searchParams.get('section') || 'all';
+  const VALID_SECTIONS = ['trump-daily', 'mess', 'wars', 'epstein', 'all'];
+  const rawSection = (searchParams.get('section') || 'all').toLowerCase().trim();
+
+  if (!VALID_SECTIONS.includes(rawSection)) {
+    return NextResponse.json(
+      { error: 'Invalid section. Valid values: trump-daily, mess, wars, epstein, all' },
+      { status: 400 }
+    );
+  }
+
+  const section = rawSection;
   
   try {
     const feeds: Record<string, { url: string; source: string; category: NewsItem['category'] }[]> = {
